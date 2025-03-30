@@ -4,31 +4,47 @@ const optionsList = ["rock", "paper", "scissors"];
 let userScore = 0;
 let computerScore = 0;
 
-function getComputerChoice() {
+
+function playRound() {
+
     let randomNumber = Math.floor(Math.random()*3);
     let computerChoice = optionsList[randomNumber];
-    return computerChoice;
-}
+    
+    let humanChoice = prompt("Please choose: rock, paper or scissors!").toLowerCase();
 
-function getHumanChoice() {
-    let humanChoice = prompt("Please choose: rock, paper or scissors!");
-    return humanChoice.toLowerCase();
-}
-
-
-function playRound(userChoice, computerChoice) {
-    if (userChoice == "rock" && computerChoice == "scissors"
-        || userChoice == "paper" && computerChoice == "rock"
-        || userChoice == "scissors" && computerChoice == "paper"
+    if (humanChoice == "rock" && computerChoice == "scissors"
+        || humanChoice == "paper" && computerChoice == "rock"
+        || humanChoice == "scissors" && computerChoice == "paper"
     ) {
         userScore += 1;
-        console.log(`User wins!\nUser score: ${userScore}\nComputer score: ${computerScore}`);
-    } else if (userChoice == computerChoice) {
-        console.log("It's a draw!");
+        console.log(`User wins with ${humanChoice}!\nUser score: ${userScore}\nComputer score: ${computerScore}`);
+    } else if (humanChoice == computerChoice) {
+        console.log(`It's a draw with ${humanChoice}s!\nUser score: ${userScore}\nComputer score: ${computerScore}`);
     } else {
         computerScore += 1;
-        console.log(`Computer wins!\nUser score: ${userScore}\nComputer score: ${computerScore}`);
+        console.log(`Computer wins with ${computerChoice}\nUser score: ${userScore}\nComputer score: ${computerScore}`);
+    }
+    
+    
+}
+
+function finalResults(firstResult, secondResult) {
+    switch (firstResult) {
+        case firstResult < secondResult:
+            console.log(`User loses!\nFinal score:\nUser: ${firstResult}\nComputer: ${secondResult}`);
+        case firstResult > secondResult:
+            console.log(`User wins!\nFinal score:\nUser: ${firstResult}\nComputer: ${secondResult}`);
+        case firstResult == secondResult:
+            console.log(`It's a draw!\nFinal score:\nUser: ${firstResult}\nComputer: ${secondResult}`);
+    }   
+}
+
+function playGame() {
+    for (let i = 1; i <= 3; i++) {
+        console.log(`It's time for round ${i}!`);
+        playRound();
     }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+playGame();
+// finalResults(userScore, computerScore);
