@@ -4,22 +4,49 @@ const choicesList = ["rock", "paper", "scissors"];
 let humanScore = 0;
 let computerScore = 0;
 
+const container = document.createElement("div");
+const score = document.createElement("div");
+document.body.appendChild(container);
+document.body.appendChild(score);
 
-function playRound() {    //computes who is a winner basing off their choice,
+const rockButton = document.createElement("button");
+const paperButton = document.createElement("button");
+const scissorsButton = document.createElement("button");
+const buttons = document.querySelectorAll("buttons");
+
+container.appendChild(rockButton);
+container.appendChild(paperButton);
+container.appendChild(scissorsButton);
+
+rockButton.textContent = "Rock";
+paperButton.textContent = "Paper";
+scissorsButton.textContent = "Scissors";
+
+rockButton.setAttribute("id", "Rock")
+paperButton.setAttribute("id", "Paper")
+scissorsButton.setAttribute("id", "Scissors")
+
+container.addEventListener("click", function (e) {
+    let humanChoice = e.target.id;
+    console.log(humanChoice);
+
+    playRound(humanChoice);
+})
+
+
+function playRound(choice) {    //computes who is a winner basing off their choice,
                          //and increments their score if needed 
 
     let randomNumber = Math.floor(Math.random() * 3);
     let computerChoice = choicesList[randomNumber];
 
-    let humanChoice = prompt("Please choose: rock, paper or scissors!").toLowerCase();
-
-    if (humanChoice == "rock" && computerChoice == "scissors"
-        || humanChoice == "paper" && computerChoice == "rock"
-        || humanChoice == "scissors" && computerChoice == "paper") {
+    if (choice == "Rock" && computerChoice == "scissors"
+        || choice == "Paper" && computerChoice == "rock"
+        || choice == "Scissors" && computerChoice == "paper") {
         humanScore += 1;
-        console.log(`User wins with ${humanChoice}!\nUser score: ${humanScore}\nComputer score: ${computerScore}`);
+        console.log(`User wins with ${choice}!\nUser score: ${humanScore}\nComputer score: ${computerScore}`);
 
-    } else if (humanChoice == computerChoice) {
+    } else if (choice == computerChoice) {
         console.log(`It's a draw with ${humanChoice}s!\nUser score: ${humanScore}\nComputer score: ${computerScore}`);
 
     } else {
@@ -41,14 +68,10 @@ function finalResults(firstScore, secondScore) { //final results basing off glob
         }
     }
 
-function playGame() {
+// function playGame() {
+//     playRound();
 
-    for (let i = 1; i <= 3; i++) {
-        console.log(`It's time for round ${i}!`);
-        playRound();
-    };
+//     finalResults(humanScore, computerScore);
+// }
 
-    finalResults(humanScore, computerScore);
-}
-
-playGame();
+// playGame();
