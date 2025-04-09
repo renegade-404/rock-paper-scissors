@@ -3,6 +3,7 @@ console.log("Welcome to my little rock-paper scissors game!");
 const choicesList = ["rock", "paper", "scissors"];
 let humanScore = 0;
 let computerScore = 0;
+let count = 0;
 
 const container = document.createElement("div");
 const score = document.createElement("div");
@@ -28,9 +29,11 @@ scissorsButton.setAttribute("id", "Scissors")
 
 container.addEventListener("click", function (e) {
     let humanChoice = e.target.id;
-    console.log(humanChoice);
 
-    playRound(humanChoice);
+    playRound(humanChoice)
+
+    if (count == 5) finalResults(humanScore, computerScore)
+
 })
 
 
@@ -53,6 +56,8 @@ function playRound(choice) {    //computes who is a winner basing off their choi
         computerScore += 1;
         console.log(`Computer wins with ${computerChoice}\nUser score: ${humanScore}\nComputer score: ${computerScore}`);
     }
+
+    count += 1;
 }
 
 function finalResults(firstScore, secondScore) { //final results basing off global scores 
@@ -67,11 +72,3 @@ function finalResults(firstScore, secondScore) { //final results basing off glob
             console.log(`It's a draw!\nFinal score:\nUser: ${firstScore}\nComputer: ${secondScore}`);
         }
     }
-
-// function playGame() {
-//     playRound();
-
-//     finalResults(humanScore, computerScore);
-// }
-
-// playGame();
